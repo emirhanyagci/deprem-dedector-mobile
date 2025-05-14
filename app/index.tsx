@@ -7,13 +7,15 @@ const audioSource = require('../assets/ses.mp3');
 
 
 export default function HomeScreen() {
-    const player = useAudioPlayer(audioSource);
+    const player = useAudioPlayer(require('../assets/ses.mp3'));
+    player.loop = true;
     const [isEnabled, setIsEnabled] = useState(false);
     const [test, setTest] = useState("blabla")
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     console.log("yoo");
 
     useEffect(() => {
+
         const socket = io("https://deprem-dedektor-server.onrender.com");
 
         socket.on("connect", () => {
