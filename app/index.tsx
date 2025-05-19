@@ -1,8 +1,7 @@
 import { useAudioPlayer } from 'expo-audio';
 import { useEffect, useState } from 'react';
-import { Button, StyleSheet, Switch, Text, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import { io } from "socket.io-client";
-const audioSource = require('../assets/ses.mp3');
 
 
 
@@ -10,9 +9,7 @@ export default function HomeScreen() {
     const player = useAudioPlayer(require('../assets/ses.mp3'));
     player.loop = true;
     const [isEnabled, setIsEnabled] = useState(false);
-    const [test, setTest] = useState("blabla")
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    console.log("yoo");
 
     useEffect(() => {
 
@@ -32,14 +29,6 @@ export default function HomeScreen() {
     }, [])
     return (
         <View style={styles.container}>
-            <Text>{test}</Text>
-            <Switch
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-            />
             <Button title="Play Sound" onPress={() => player.play()} />
             <View style={styles.stopButton}>
                 <Button title="Stop Sound" onPress={() => player.pause()} />
